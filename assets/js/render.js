@@ -395,7 +395,7 @@
       src.src = s[0]; src.type = s[1];
       v.appendChild(src);
     });
-    if (item.imageAlt) { v.setAttribute("role", "img"); v.setAttribute("aria-label", item.imageAlt); }
+    if (item.imageAlt) v.setAttribute("aria-label", item.imageAlt);   // what it shows, for screen readers
     if (item.image) v.poster = fit(item.image, item.imageSmall);
     figCount++;
     var tag = el("span", "art-tag mono", ["Fig. " + (figCount < 10 ? "0" : "") + figCount + " / " + (item.mediaTag || "Video")]);
