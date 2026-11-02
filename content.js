@@ -74,6 +74,10 @@
    2000 pixels wide or less, and keep it under about 300 KB (squoosh.app does all
    three). Don't use photos that show other people's faces. To swap a photo, give
    the new file the same name, or change the name here.
+   Optional, for big photos in a Photos tab (and video posters): an 800-pixel-wide
+   copy for phones, named like "my-photo-small.jpg", added as
+     imageSmall: "assets/img/my-photo-small.jpg",
+   Phones load that one; computers and the enlarged view use the full photo.
 
    DRONE PHOTOS: in "hobbies:", find the drone item and fill in its photos list
    (3 to 6 look best). They replace the drone drawing.
@@ -288,9 +292,9 @@ window.SITE = {
     tabs: [
       { label: "Drawing" },
       { label: "Photos", photos: [
-        { image: "assets/img/rov-sarbot-mount.jpg", caption: "The mount on the SARbot.",
+        { image: "assets/img/rov-sarbot-mount.jpg", imageSmall: "assets/img/rov-sarbot-mount-small.jpg", caption: "The mount on the SARbot.",
           alt: "The SARbot, a yellow and black underwater vehicle, on a table outdoors, with Nicholas's white 3D-printed mount holding the modem's watertight enclosure on top" },
-        { image: "assets/img/rov-mount-prototypes.jpg", caption: "Prototype versions of the mounts.",
+        { image: "assets/img/rov-mount-prototypes.jpg", imageSmall: "assets/img/rov-mount-prototypes-small.jpg", caption: "Prototype versions of the mounts.",
           alt: "Red, blue, and white 3D-printed prototype mounts spread across a desk" },
       ] },
     ],
@@ -319,6 +323,7 @@ window.SITE = {
       video: "assets/video/usv-apf.mp4",
       videoWebm: "assets/video/usv-apf.webm",
       image: "assets/video/usv-apf-poster.jpg",
+      imageSmall: "assets/video/usv-apf-poster-small.jpg",   // the poster for phones
       imageAlt: "Simulation of the artificial potential field model: the agent, a blue dot, moves across an X/Y grid toward the goal, a red star.",
       mediaTag: "Simulation",
       spotlight: 2,                        // second full-width card, after the welding arm

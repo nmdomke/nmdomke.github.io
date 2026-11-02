@@ -99,6 +99,11 @@
     ro.observe(document.documentElement);
   }
 
+  // Phones get a photo's smaller copy ("imageSmall" in content.js) when it has one.
+  // Enlarged photos always use the full-size file.
+  var phoneMQ = window.matchMedia("(max-width: 600px)");
+  function fit(big, small) { return small && phoneMQ.matches ? small : big; }
+
   function live(list) { return (list || []).filter(function (x) { return x && !x.draft; }); }
 
   function hide(node, menuHash) {
@@ -391,7 +396,7 @@
       v.appendChild(src);
     });
     if (item.imageAlt) { v.setAttribute("role", "img"); v.setAttribute("aria-label", item.imageAlt); }
-    if (item.image) v.poster = item.image;
+    if (item.image) v.poster = fit(item.image, item.imageSmall);
     figCount++;
     var tag = el("span", "art-tag mono", ["Fig. " + (figCount < 10 ? "0" : "") + figCount + " / " + (item.mediaTag || "Video")]);
     tag.setAttribute("aria-hidden", "true");
@@ -430,7 +435,7 @@
     count.setAttribute("aria-live", "polite");
     function show(n) {
       i = (n + photos.length) % photos.length;
-      img.src = photos[i].image; img.alt = photos[i].alt || "";
+      img.src = fit(photos[i].image, photos[i].imageSmall); img.alt = photos[i].alt || "";
       open.classList.toggle("no-enlarge", !!photos[i].noEnlarge);   // shown at most at its real size
       cap.textContent = photos[i].caption || "";
       count.textContent = (i + 1) + " / " + photos.length;
