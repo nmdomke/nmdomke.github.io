@@ -2043,6 +2043,12 @@
         done(e.target);
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    // A link straight to something (like a job row) shows the block it's in right
+    // away, so the browser scrolls to where it really is, not 18px low.
+    var linked = null;
+    try { linked = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) {}
+    targets = [].filter.call(targets, function (n) { return !(linked && n.contains(linked)); });
+    pending = targets.slice();
     targets.forEach(function (n) { n.classList.add("rise"); io.observe(n); });
     // A jump (link, reload partway down) can carry a block from below the screen to
     // above it without it ever intersecting. Show those right away.
