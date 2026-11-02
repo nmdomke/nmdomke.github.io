@@ -114,6 +114,22 @@ lines.forEach((l, i) => {
   if (/(\(\d{3}\)\s*|\b\d{3}[-. ])\d{3}[-. ]\d{4}\b/.test(l)) report("This line looks like it has a phone number. The repo is public, so leave it off.", i + 1);
 });
 
+// 6. index.html has a copy of the hero (so it shows before the scripts load); its words
+//    should match content.js, or the old words flash for a moment as the page opens
+(function () {
+  const html = fs.readFileSync(path.join(root, "index.html"), "utf8").replace(/&amp;/g, "&");
+  const m = /data-slot="hero">([\s\S]*?)<\/div>\s*<a class="scroll-cue/.exec(html);
+  if (!m) return;
+  const L = SITE.links || {};
+  [["firstName", SITE.firstName], ["lastName", SITE.lastName], ["tagline", SITE.tagline],
+    ["status", SITE.status], ["seeking", SITE.seeking], ["email", L.email], ["linkedin", L.linkedin]]
+    .forEach(([key, value]) => {
+      if (value && !m[1].includes(String(value).trim())) {
+        report(`The hero copy in index.html doesn't match "${key}" here. Update the same words in index.html (search it for data-slot="hero").`, lineOf(`${key}:`));
+      }
+    });
+})();
+
 if (problems.length) {
   console.error(`\ncontent.js: ${problems.length} problem${problems.length === 1 ? "" : "s"} found.`);
   process.exit(1);

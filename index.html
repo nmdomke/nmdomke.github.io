@@ -72,13 +72,19 @@
     <!-- DARK: hero -->
     <section class="pane pane-dark hero" id="top" data-pane="dark">
       <canvas class="dotfield" aria-hidden="true"></canvas>
+      <!-- A copy of the hero, so his name shows the moment the page opens instead of
+           waiting for the scripts. render.js swaps in the version built from content.js,
+           so content.js still wins. If you change the name, tagline, status, or seeking
+           line in content.js, update the same words here too (the content check on
+           GitHub reminds you if they don't match). -->
       <div class="hero-inner" data-slot="hero">
-        <noscript>
-          <h1 class="hero-name dot"><span>Nicholas</span><span>Domke</span></h1>
-          <p class="tagline">This site needs JavaScript to show the full portfolio. Reach Nicholas at
-            <a href="mailto:nmdomke2004@gmail.com">nmdomke2004@gmail.com</a> or on
-            <a href="https://www.linkedin.com/in/nicholas-domke/">LinkedIn</a>.</p>
-        </noscript>
+        <p class="mono kicker"><span class="kicker-part">Mechanical Engineering /</span> <span class="kicker-part">LSU /</span> <span class="kicker-part">Class of 2027</span></p>
+        <h1 class="hero-name dot" aria-label="Nicholas Domke"><span data-scramble="" aria-hidden="true">Nicholas</span><span data-scramble="" aria-hidden="true">Domke</span></h1>
+        <p class="tagline">I design robot parts in CAD, build them in the shop, and test them in the real world.</p>
+        <p class="status mono"><span class="rec"></span>Now: building a path planner for unmanned surface vessels at the LSU iCORE Lab</p>
+        <p class="status seeking mono">Applying to M.S. programs in controls and mechanical systems for Fall 2027. Open to research and internship roles.</p>
+        <div class="actions"><a class="pill pill-solid" href="mailto:nmdomke2004@gmail.com">Email me</a><a class="pill pill-ghost" href="https://www.linkedin.com/in/nicholas-domke/" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a><span class="pill-split"><a class="pill pill-ghost" href="resume.html">Resume</a><a class="pill pill-ghost pill-pdf" href="assets/Nicholas_Domke_Resume.pdf" download="Nicholas_Domke_Resume.pdf" aria-label="Download resume as PDF">PDF</a></span></div>
+        <noscript><p class="status mono">The rest of this portfolio needs JavaScript.</p></noscript>
       </div>
       <a class="scroll-cue mono" href="#intro">Scroll</a>
     </section>

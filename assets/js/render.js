@@ -177,6 +177,9 @@
     return row;
   }
 
+  // index.html has a copy of the hero so it shows before this script runs. Replace
+  // it with the one built from content.js, which always has the current text.
+  hero.textContent = "";
   hero.appendChild(kicker);
   hero.appendChild(name);
   if (S.tagline) hero.appendChild(el("p", "tagline", [S.tagline]));
