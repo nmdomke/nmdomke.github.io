@@ -86,6 +86,7 @@ turn off automatically.
 | `resume.html` | Your resume as a web page, built from `content.js` and styled like your PDF. No phone number. Visitors can print it or download your PDF |
 | `assets/Nicholas_Domke_Resume.pdf` | Your resume PDF (the Download PDF buttons). No phone number |
 | `assets/css/style.css` | How the main page looks |
+| `assets/fonts/` | The three fonts (Doto, Space Grotesk, Space Mono), kept here so the page doesn't wait on Google Fonts. The OFL files are their free-use licenses |
 | `assets/css/resume.css` | How the resume page looks, on screen and printed |
 | `assets/js/render.js` | Builds the main page from `content.js` |
 | `assets/js/resume.js` | Builds the resume page from `content.js` |
@@ -213,6 +214,11 @@ The top of `content.js` has copy-paste templates for the edits below.
    write `imageAlt` (what the photo shows, for screen readers).
 4. To swap a photo, upload the new one with the same file name (it replaces the
    old one), or upload it with a new name and change `image`.
+5. Optional, for big photos in a Photos tab: also upload an 800-pixel-wide copy
+   named like `your-photo-small.jpg` and add `imageSmall: "assets/img/your-photo-small.jpg"`
+   next to its `image`. Phones load the small copy, which saves them a lot of
+   data; computers and the enlarged view still get the full photo. The video
+   poster (`usv-apf-poster-small.jpg`) works the same way.
 
 ### Add drone photos
 
@@ -242,6 +248,13 @@ from the site and the resume page. Delete the line to show it again.
 Near the top of `content.js`, `status` is the line with the blue dot in the top
 section ("Now: building a path planner ..."), and `seeking` is the line under it.
 Change the text in the quotes. Set either to `""` to hide it.
+
+`index.html` also has a copy of the top section (your name, the tagline, and these
+two lines) so it shows the instant the page opens, before the scripts load. When
+you change any of them in `content.js`, change the same words in `index.html`
+(search it for `data-slot="hero"`). If you forget, the site still shows the new
+words from `content.js`, the old ones just flash for a moment as it loads, and the
+content check on GitHub puts a red X on the commit to remind you.
 
 ### Update the numbers card
 
