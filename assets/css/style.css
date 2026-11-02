@@ -233,10 +233,18 @@ body.menu-open .bar::before { opacity: 0; }
    Capped near the tagline's width so the two lines wrap into a neat centered block. */
 .status { max-width: 700px; margin: 26px auto 0; font-size: 0.8rem; line-height: 1.6; color: #A6A6A6; text-wrap: balance; }
 .seeking { margin-top: 10px; }
-/* the "Now" dot: the light accent blue, with a gentle pulse (it never fades out) */
-.rec { display: inline-block; margin-right: 10px; vertical-align: 0.05em; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-lt); box-shadow: 0 0 0 3px rgba(122,167,255,.25), 0 0 12px rgba(122,167,255,.8); animation: rec 2.2s ease-in-out infinite; }
-@keyframes rec { 50% { opacity: .6; box-shadow: 0 0 0 6px rgba(122,167,255,.08), 0 0 6px rgba(122,167,255,.5); } }
-@media (prefers-reduced-motion: reduce) { .rec { animation: none; } }
+/* the "Now" dot: the light accent blue, with a gentle pulse (it never fades out).
+   The ring (::before) and the glow (::after) are separate layers that only scale and
+   fade, which the browser can animate without repainting. Both are the dot's own blue,
+   so where they overlap the dot it doesn't change. */
+.rec { position: relative; display: inline-block; margin-right: 10px; vertical-align: 0.05em; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-lt); animation: rec 2.2s ease-in-out infinite; }
+.rec::before, .rec::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; animation: 2.2s ease-in-out infinite; }
+.rec::before { inset: -3px; background: rgba(122,167,255,.25); animation-name: rec-ring; }    /* a 3px ring that widens to 6px */
+.rec::after { inset: 0; box-shadow: 0 0 12px rgba(122,167,255,.8); animation-name: rec-glow; } /* a 12px glow that tightens */
+@keyframes rec { 50% { opacity: .6; } }
+@keyframes rec-ring { 50% { transform: scale(1.375); opacity: .32; } }
+@keyframes rec-glow { 50% { transform: scale(.65); opacity: .625; } }
+@media (prefers-reduced-motion: reduce) { .rec, .rec::before, .rec::after { animation: none; } }
 
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 34px; }
 
