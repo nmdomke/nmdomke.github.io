@@ -37,6 +37,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght,ROND@700..900,100&family=Space+Grotesk:wght@300..600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- "defer" downloads these while the page shows and runs them in this order once
+       it's read. content-guard.js goes first: it turns a mistake in content.js into a
+       clear message instead of a blank page. content.js must load before render.js. -->
+  <script defer src="assets/js/content-guard.js"></script>
+  <script defer src="content.js" onerror="window.SITE_ERROR = { message: 'content.js could not be loaded. It may be missing, renamed, or not in the main folder.', line: 0 }"></script>
+  <script defer src="assets/js/drawings.js"></script>
+  <script defer src="assets/js/model3d.js"></script>
+  <script defer src="assets/js/render.js"></script>
   <noscript><style>main > :not(.hero), .scroll-cue, .bar-right { display: none !important; }</style></noscript>
 </head>
 <body>
@@ -153,14 +161,5 @@
 
   <footer class="pane pane-dark foot mono" data-pane="dark" data-slot="footer"></footer>
 
-
-
-  <!-- content.js must load before render.js -->
-  <!-- content-guard.js turns a mistake in content.js into a clear message instead of a blank page -->
-  <script src="assets/js/content-guard.js"></script>
-  <script src="content.js" onerror="window.SITE_ERROR = { message: 'content.js could not be loaded. It may be missing, renamed, or not in the main folder.', line: 0 }"></script>
-  <script src="assets/js/drawings.js"></script>
-  <script src="assets/js/model3d.js"></script>
-  <script src="assets/js/render.js"></script>
 </body>
 </html>
