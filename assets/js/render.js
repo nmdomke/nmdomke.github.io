@@ -91,6 +91,14 @@
 
   function slot(name) { return document.querySelector('[data-slot="' + name + '"]'); }
 
+  // Runs fn once, right after the browser next lays out the page. Measuring sizes
+  // there is free; measuring while the page is still being built makes the browser
+  // lay everything out early, and again after each change.
+  function afterLayout(fn) {
+    var ro = new ResizeObserver(function () { ro.disconnect(); fn(); });
+    ro.observe(document.documentElement);
+  }
+
   function live(list) { return (list || []).filter(function (x) { return x && !x.draft; }); }
 
   function hide(node, menuHash) {
@@ -788,7 +796,7 @@
     var ro = new ResizeObserver(queue);
     items.forEach(function (c) { ro.observe(c); });
     ro.observe(grid);
-    pack();
+    afterLayout(pack);   // the first pack, once the page is laid out (before it's shown)
   }
 
   // A photo opened larger, in a dialog (Escape, the Close button, or a click outside closes it).
@@ -1064,7 +1072,7 @@
         g.classList.add("two");
         if (over()) { g.classList.remove("two"); g.classList.add("down"); }
       };
-      requestAnimationFrame(fitGrad);
+      afterLayout(fitGrad);
       window.addEventListener("resize", fitGrad);
     }
     if (cut) {
@@ -1842,7 +1850,7 @@
   function barSoon() { if (!barTick) barTick = requestAnimationFrame(updateBar); }
   window.addEventListener("scroll", barSoon, { passive: true });
   window.addEventListener("resize", barSoon);
-  updateBar();
+  afterLayout(updateBar);
 
   /* ======================= dot field ======================= */
   // A grid of dots that brighten near the pointer, with random dots
@@ -1944,7 +1952,7 @@
     onMotionChange.push(function () { blinks = []; draw(performance.now()); kick(); });
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(size, 150); });
-    size();
+    afterLayout(size);
   }
 
   document.querySelectorAll(".dotfield").forEach(dotfield);
@@ -2054,7 +2062,7 @@
     var t = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
     if (t && t.classList.contains("log-row")) jumpTo(t);
   }
-  fromHash();
+  afterLayout(fromHash);
   window.addEventListener("hashchange", fromHash);
 
   // Hero name decodes on load.
