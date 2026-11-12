@@ -320,10 +320,8 @@ window.SITE = {
       tools: ["Python", "Matplotlib"],
       // His Matplotlib animation of the potential field model. "image" is the still
       // frame shown before it plays (and with reduced motion). "mediaTag" labels it.
-      video: "assets/video/usv-apf.mp4",
-      videoWebm: "assets/video/usv-apf.webm",
-      image: "assets/video/usv-apf-poster.jpg",
-      imageSmall: "assets/video/usv-apf-poster-small.jpg",   // the poster for phones
+      image: "assets/img/usv-path-planning.gif",   // to update it, upload a new GIF with this same name
+      imageFit: "contain",                 // show the whole plot, no cropping
       imageAlt: "Simulation of the artificial potential field model: the agent, a blue dot, moves across an X/Y grid toward the goal, a red star.",
       mediaTag: "Simulation",
       spotlight: 2,                        // second full-width card, after the welding arm
