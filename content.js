@@ -318,11 +318,10 @@ window.SITE = {
         "Next: combining them into one planner that uses a perception system to avoid static and moving obstacles it isn't told about ahead of time, and still reaches the goal by the best path",
       ],
       tools: ["Python", "Matplotlib"],
-      // His Matplotlib animation of the potential field model. "image" is the still
-      // frame shown before it plays (and with reduced motion). "mediaTag" labels it.
+      // His Matplotlib animation. To update it, upload a new GIF to assets/img with this same name.
       image: "assets/img/usv-path-planning.gif",   // to update it, upload a new GIF with this same name
       imageFit: "contain",                 // show the whole plot, no cropping
-      imageAlt: "Simulation of the artificial potential field model: the agent, a blue dot, moves across an X/Y grid toward the goal, a red star.",
+      imageAlt: "Simulation of the artificial potential field model: the agent, a blue dot, steers around obstacles and their safety clearances to reach the goal, a red star.",
       mediaTag: "Simulation",
       spotlight: 2,                        // second full-width card, after the welding arm
       link: "",
